@@ -115,6 +115,7 @@
             this.Controls.Add(this.btnGetPOFiles);
             this.Controls.Add(this.lbPOFiles);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

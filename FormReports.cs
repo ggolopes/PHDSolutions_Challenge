@@ -15,7 +15,6 @@ namespace PHD_ChallengeDesktop
     {
         SqlConnection DB_conn = new SqlConnection(@"Server=NBASUSGUIGA;Database=phdChallenge_DB;Trusted_Connection=True;User ID=phd;Password=phdsolutions;MultipleActiveResultSets=true;TrustServerCertificate=true");
         SqlCommand sqlCmd;
-        SqlDataAdapter sqlDataAdapter;
         DataTable dataTable;
         string sql;
 
@@ -44,6 +43,9 @@ namespace PHD_ChallengeDesktop
                 dataTable.Load(reader);
                 reader.Close();
                 dbgvProjects.DataSource = dataTable;
+                dbgvProjects.AllowUserToAddRows = false;
+                dbgvProjects.AllowUserToDeleteRows = false;
+                dbgvProjects.ReadOnly = true;
             }
             catch (SqlException ex)
             {
@@ -75,6 +77,9 @@ namespace PHD_ChallengeDesktop
                 dataTable.Load(reader);
                 reader.Close();
                 dbgvPurchases.DataSource = dataTable;
+                dbgvPurchases.AllowUserToAddRows = false;
+                dbgvPurchases.AllowUserToDeleteRows = false;
+                dbgvPurchases.ReadOnly = true;
 
                 // Users
                 sql = " SELECT DISTINCT u.fullName AS Purchaser_Fullname, count(pr.partNumber) AS Number_of_Purchases" +
@@ -88,6 +93,9 @@ namespace PHD_ChallengeDesktop
                 dataTable.Load(reader);
                 reader.Close();
                 dbgvUsers.DataSource = dataTable;
+                dbgvUsers.AllowUserToAddRows = false;
+                dbgvUsers.AllowUserToDeleteRows = false;
+                dbgvUsers.ReadOnly = true;
 
                 // Parts
                 sql = " SELECT pr.partNumber, mm.Description, SUM(pr.quantity) AS Quantity_Total," +
@@ -103,6 +111,9 @@ namespace PHD_ChallengeDesktop
                 dataTable.Load(reader);
                 reader.Close();
                 dbgvParts.DataSource = dataTable;
+                dbgvParts.AllowUserToAddRows = false;
+                dbgvParts.AllowUserToDeleteRows = false;
+                dbgvParts.ReadOnly = true;
 
                 // Total Cost
                 sql = " SELECT pr.projet AS Proj_Number, pj.ProjectDescription AS Project_Name," +
@@ -117,6 +128,9 @@ namespace PHD_ChallengeDesktop
                 dataTable.Load(reader);
                 reader.Close();
                 dbgvTotal.DataSource = dataTable;
+                dbgvTotal.AllowUserToAddRows = false;
+                dbgvTotal.AllowUserToDeleteRows = false;
+                dbgvTotal.ReadOnly = true;
 
             }
             catch (SqlException ex)
