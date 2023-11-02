@@ -23,7 +23,7 @@ namespace PHD_ChallengeDesktop
             InitializeComponent();
 
             ShowProjects();
-            ShowPurchaseOrdersByProject(dbgvProjects.Rows[0].Cells[0].Value.ToString());
+            ShowProjectInfo(dbgvProjects.Rows[0].Cells[0].Value.ToString());
         }
 
         private void ShowProjects()
@@ -57,7 +57,7 @@ namespace PHD_ChallengeDesktop
             }
         }
 
-        public void ShowPurchaseOrdersByProject(string projNumber)
+        public void ShowProjectInfo(string projNumber)
         {
             SqlConnection conn = DB_conn;
             try
@@ -141,18 +141,47 @@ namespace PHD_ChallengeDesktop
             {
                 conn.Close();
             }
+            if (string.IsNullOrEmpty(lblProjectName.Text))
+            {
+                lblProjectName.Text = dbgvProjects.Rows[0].Cells[1].Value.ToString() + " - " + dbgvProjects.Rows[0].Cells[0].Value.ToString();
+            }
+
         }
 
 
         private void dbgvProjects_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //MessageBox.Show("Clicado " + dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString());
-            ShowPurchaseOrdersByProject(dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString());
+            lblProjectName.Text = dbgvProjects.Rows[e.RowIndex].Cells[1].Value.ToString() + " - " + dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString();
+            ShowProjectInfo(dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString());
         }
 
         private void FormReports_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void dbgvTotal_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblTitleTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dbgvProjects_SelectionChanged(object sender, EventArgs e)
+        {
+            //            MessageBox.Show("Mudou");
+//            lblProjectName.Text = dbgvProjects.Rows[1].Cells[0].Value.ToString() + " - " + dbgvProjects.Rows[0].Cells[0].Value.ToString();
+        }
+
+        private void dbgvProjects_CurrentCellChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void lblProjectName_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }
