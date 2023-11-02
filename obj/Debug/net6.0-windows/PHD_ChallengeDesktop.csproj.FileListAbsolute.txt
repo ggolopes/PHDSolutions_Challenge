@@ -22,3 +22,4 @@ C:\Files\C#_Codes\phdChallenge\PHD_ChallengeDesktop\bin\Debug\net6.0-windows\run
 C:\Files\C#_Codes\phdChallenge\PHD_ChallengeDesktop\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Files\C#_Codes\phdChallenge\PHD_ChallengeDesktop\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Files\C#_Codes\phdChallenge\PHD_ChallengeDesktop\obj\Debug\net6.0-windows\PHD_ChallengeDesktop.csproj.CopyComplete
+C:\Files\C#_Codes\phdChallenge\PHD_ChallengeDesktop\obj\Debug\net6.0-windows\PHD_ChallengeDesktop.FormReports.resources

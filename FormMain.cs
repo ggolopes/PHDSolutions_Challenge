@@ -33,7 +33,6 @@ namespace PHD_ChallengeDesktop
             PurchaseOrder purchaseOrder;
             XmlSerializer serializer = new XmlSerializer(typeof(PurchaseOrder));
 
-            DB_conn.Open();
 
             lbPurchaseOrders.Items.Clear();
             for (int k = 0; k < lbPOFiles.Items.Count; k++)
@@ -67,8 +66,20 @@ namespace PHD_ChallengeDesktop
                         sqlCmd.Parameters.Add(new SqlParameter("@p_costPer", float.Parse(purchaseOrder.purchaseItem[i].costPer.ToString())));
                         sqlCmd.Parameters.Add(new SqlParameter("@p_purchaser", purchaseOrder.purchaseItem[i].purchaser));
                         sqlCmd.Parameters.Add(new SqlParameter("@p_project", purchaseOrder.purchaseItem[i].project));
-                        sqlCmd.ExecuteNonQuery();
-                        sqlCmd = null;
+                        try
+                        {
+                            DB_conn.Open();
+                            sqlCmd.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
+                        finally
+                        {
+                            sqlCmd = null;
+                            DB_conn.Close();
+                        }
                     }
                 }
                 else // The PurchaseOrder doesn't have purchaseItems
@@ -79,7 +90,19 @@ namespace PHD_ChallengeDesktop
                 lbPurchaseOrders.Items.Add("\n\n");
 
             }
-            DB_conn.Close();
+        }
+
+        FormReports formReports;
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            if (formReports == null)
+            {
+                formReports = new FormReports();
+                formReports.Show();
+            } else
+            {
+                formReports.Activate();
+            }
         }
     }
 }
