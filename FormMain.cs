@@ -12,24 +12,10 @@ namespace PHD_ChallengeDesktop
         }
         SqlConnection DB_conn = new SqlConnection(@"Server=NBASUSGUIGA;Database=phdChallenge_DB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
     
-
-
-        private void btnGetPOFiles_Click(object sender, EventArgs e)
-        {
-            string curDir = Path.GetDirectoryName(txtFolder.Text);
-            DirectoryInfo dir = new DirectoryInfo(curDir);
-            FileInfo[] files = dir.GetFiles("*.xml");
-
-            lbPOFiles.Items.Clear();
-            foreach (FileInfo file in files)
-            {
-                lbPOFiles.Items.Add(file.Name);
-            }
-        }
-
         private void btnImportPO_Click(object sender, EventArgs e)
         {
             string curDir = Path.GetDirectoryName(txtFolder.Text);
+            int poOrdersConter = 0;
             PurchaseOrder purchaseOrder;
             XmlSerializer serializer = new XmlSerializer(typeof(PurchaseOrder));
 
@@ -70,6 +56,8 @@ namespace PHD_ChallengeDesktop
                         {
                             DB_conn.Open();
                             sqlCmd.ExecuteNonQuery();
+                            poOrdersConter++;
+                            sqlCmd = null;
                         }
                         catch (Exception ex)
                         {
@@ -77,7 +65,6 @@ namespace PHD_ChallengeDesktop
                         }
                         finally
                         {
-                            sqlCmd = null;
                             DB_conn.Close();
                         }
                     }
@@ -90,6 +77,9 @@ namespace PHD_ChallengeDesktop
                 lbPurchaseOrders.Items.Add("\n\n");
 
             }
+            lbPurchaseOrders.Items.Add("\n" + poOrdersConter.ToString() + " Purchase Orders were inserted into database.");
+            lbPurchaseOrders.SetSelected(lbPurchaseOrders.Items.Count - 1, true);
+
         }
 
         FormReports formReports;
@@ -102,6 +92,62 @@ namespace PHD_ChallengeDesktop
             } else
             {
                 formReports.Activate();
+            }
+        }
+
+        private void btnChangeFolder_Click(object sender, EventArgs e)
+        {
+            var folder = new FolderBrowserDialog();
+            if (string.IsNullOrEmpty(txtFolder.Text))
+            {
+                folder.SelectedPath = @"C:\Files\C#_Codes\phdChallenge\PO_DATA\";
+            }
+            else
+            {
+                folder.SelectedPath = txtFolder.Text;
+            }
+            if (folder.ShowDialog() == DialogResult.OK){
+
+                txtFolder.Text = folder.SelectedPath + "\\";
+                DirectoryInfo dir = new DirectoryInfo(txtFolder.Text);
+                FileInfo[] files = dir.GetFiles("*.xml");
+
+                lbPOFiles.Items.Clear();
+                if (files.Length > 0)
+                {
+                    lblTitleFiles.Text = "Files:";
+                    btnImportPO.Enabled = true;
+                    foreach (FileInfo file in files)
+                    {
+                        lbPOFiles.Items.Add(file.Name);
+                    }
+                }
+                else
+                {
+                    lblTitleFiles.Text = "Files:  NO XML FILE FOUND.";
+                    btnImportPO.Enabled = false;
+                }
+            }
+        }
+
+        private void btnClearDataBase_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM PurchaseRecord";
+            SqlCommand sqlCmd = new SqlCommand(sql, DB_conn);
+            try
+            {
+                DB_conn.Open();
+                sqlCmd.ExecuteNonQuery();
+                sqlCmd = null;
+                MessageBox.Show("All Purchase Orders were deleted from databsase.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                DB_conn.Close();
             }
         }
     }
