@@ -22,16 +22,18 @@ namespace PHD_ChallengeDesktop
         {
             InitializeComponent();
 
+            // Get the projects from database;
             ShowProjects();
+
+            // Get the project's info from database
             ShowProjectInfo(dbgvProjects.Rows[0].Cells[0].Value.ToString());
         }
-
         private void ShowProjects()
         {
+            // Get the projects from database;
             SqlConnection conn = DB_conn;
             try
             {
-
                 conn.Open();
                 sql = " SELECT pr.projet AS Proj_Number, pj.ProjectDescription AS Project_Name," +
                         " ROUND(sum((pr.costPer*pr.quantity)),2) AS Project_Cost_Total" +
@@ -56,9 +58,9 @@ namespace PHD_ChallengeDesktop
                 conn.Close();
             }
         }
-
         public void ShowProjectInfo(string projNumber)
         {
+            // Get the project's info from database
             SqlConnection conn = DB_conn;
             try
             {
@@ -131,7 +133,6 @@ namespace PHD_ChallengeDesktop
                 dbgvTotal.AllowUserToAddRows = false;
                 dbgvTotal.AllowUserToDeleteRows = false;
                 dbgvTotal.ReadOnly = true;
-
             }
             catch (SqlException ex)
             {
@@ -141,47 +142,23 @@ namespace PHD_ChallengeDesktop
             {
                 conn.Close();
             }
+            // Get the initial value to project name label 
             if (string.IsNullOrEmpty(lblProjectName.Text))
             {
                 lblProjectName.Text = dbgvProjects.Rows[0].Cells[1].Value.ToString() + " - " + dbgvProjects.Rows[0].Cells[0].Value.ToString();
             }
-
         }
-
-
         private void dbgvProjects_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Update the project name label
             lblProjectName.Text = dbgvProjects.Rows[e.RowIndex].Cells[1].Value.ToString() + " - " + dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString();
             ShowProjectInfo(dbgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString());
         }
 
         private void FormReports_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // exit the application if close de Report Form
             Application.Exit();
-        }
-
-        private void dbgvTotal_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void lblTitleTotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dbgvProjects_SelectionChanged(object sender, EventArgs e)
-        {
-            //            MessageBox.Show("Mudou");
-//            lblProjectName.Text = dbgvProjects.Rows[1].Cells[0].Value.ToString() + " - " + dbgvProjects.Rows[0].Cells[0].Value.ToString();
-        }
-
-        private void dbgvProjects_CurrentCellChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void lblProjectName_Paint(object sender, PaintEventArgs e)
-        {
         }
     }
 }

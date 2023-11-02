@@ -93,7 +93,6 @@
             this.lblTitleTotal.Size = new System.Drawing.Size(225, 25);
             this.lblTitleTotal.TabIndex = 8;
             this.lblTitleTotal.Text = "Total cost off all purchases:";
-            this.lblTitleTotal.Click += new System.EventHandler(this.lblTitleTotal_Click);
             // 
             // dbgvPurchases
             // 
@@ -120,8 +119,6 @@
             this.dbgvProjects.Size = new System.Drawing.Size(524, 863);
             this.dbgvProjects.TabIndex = 11;
             this.dbgvProjects.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgvProjects_CellClick);
-            this.dbgvProjects.CurrentCellChanged += new System.EventHandler(this.dbgvProjects_CurrentCellChanged);
-            this.dbgvProjects.SelectionChanged += new System.EventHandler(this.dbgvProjects_SelectionChanged);
             // 
             // dbgvUsers
             // 
@@ -152,7 +149,6 @@
             this.dbgvTotal.RowTemplate.Height = 33;
             this.dbgvTotal.Size = new System.Drawing.Size(630, 152);
             this.dbgvTotal.TabIndex = 14;
-            this.dbgvTotal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgvTotal_CellContentClick);
             // 
             // panel1
             // 
@@ -173,7 +169,6 @@
             this.lblProjectName.Name = "lblProjectName";
             this.lblProjectName.Size = new System.Drawing.Size(0, 32);
             this.lblProjectName.TabIndex = 1;
-            this.lblProjectName.Paint += new System.Windows.Forms.PaintEventHandler(this.lblProjectName_Paint);
             // 
             // lblTitleProjectName
             // 
