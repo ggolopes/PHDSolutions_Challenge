@@ -1,0 +1,5 @@
+---- Todas as partes compradas em um projeto custo e quantidade
+--select pr.projet, mm.Description, pr.partNumber, sum(pr.quantity) AS Quantity_Total, sum((pr.costPer*pr.quantity)) as Cost_Total
+--		from PurchaseRecord pr JOIN MaterialMaster mm ON pr.partNumber = mm.PartNumber
+--		group by pr.projet, pr.partNumber, mm.Description
+--		order by pr.projet

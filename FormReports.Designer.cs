@@ -33,15 +33,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblTotalPuchaseCost = new System.Windows.Forms.Label();
             this.dbgvPurchases = new System.Windows.Forms.DataGridView();
             this.dbgvProjects = new System.Windows.Forms.DataGridView();
             this.dbgvUsers = new System.Windows.Forms.DataGridView();
             this.dbgvParts = new System.Windows.Forms.DataGridView();
+            this.dbgvTotal = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvPurchases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgvTotal)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProjects
@@ -74,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(870, 540);
+            this.label2.Location = new System.Drawing.Point(953, 540);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 25);
             this.label2.TabIndex = 7;
@@ -83,20 +84,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(545, 806);
+            this.label3.Location = new System.Drawing.Point(12, 664);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(225, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Total cost off all purchases:";
-            // 
-            // lblTotalPuchaseCost
-            // 
-            this.lblTotalPuchaseCost.AutoSize = true;
-            this.lblTotalPuchaseCost.Location = new System.Drawing.Point(793, 806);
-            this.lblTotalPuchaseCost.Name = "lblTotalPuchaseCost";
-            this.lblTotalPuchaseCost.Size = new System.Drawing.Size(68, 25);
-            this.lblTotalPuchaseCost.TabIndex = 9;
-            this.lblTotalPuchaseCost.Text = "CAD $ ";
             // 
             // dbgvPurchases
             // 
@@ -115,7 +107,7 @@
             this.dbgvProjects.Name = "dbgvProjects";
             this.dbgvProjects.RowHeadersWidth = 62;
             this.dbgvProjects.RowTemplate.Height = 33;
-            this.dbgvProjects.Size = new System.Drawing.Size(524, 738);
+            this.dbgvProjects.Size = new System.Drawing.Size(524, 562);
             this.dbgvProjects.TabIndex = 11;
             this.dbgvProjects.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgvProjects_CellClick);
             // 
@@ -126,29 +118,39 @@
             this.dbgvUsers.Name = "dbgvUsers";
             this.dbgvUsers.RowHeadersWidth = 62;
             this.dbgvUsers.RowTemplate.Height = 33;
-            this.dbgvUsers.Size = new System.Drawing.Size(319, 235);
+            this.dbgvUsers.Size = new System.Drawing.Size(402, 235);
             this.dbgvUsers.TabIndex = 12;
             // 
             // dbgvParts
             // 
             this.dbgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgvParts.Location = new System.Drawing.Point(870, 568);
+            this.dbgvParts.Location = new System.Drawing.Point(953, 568);
             this.dbgvParts.Name = "dbgvParts";
             this.dbgvParts.RowHeadersWidth = 62;
             this.dbgvParts.RowTemplate.Height = 33;
-            this.dbgvParts.Size = new System.Drawing.Size(972, 235);
+            this.dbgvParts.Size = new System.Drawing.Size(889, 235);
             this.dbgvParts.TabIndex = 13;
+            // 
+            // dbgvTotal
+            // 
+            this.dbgvTotal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgvTotal.Location = new System.Drawing.Point(15, 692);
+            this.dbgvTotal.Name = "dbgvTotal";
+            this.dbgvTotal.RowHeadersWidth = 62;
+            this.dbgvTotal.RowTemplate.Height = 33;
+            this.dbgvTotal.Size = new System.Drawing.Size(524, 111);
+            this.dbgvTotal.TabIndex = 14;
             // 
             // FormReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2126, 870);
+            this.ClientSize = new System.Drawing.Size(1865, 870);
+            this.Controls.Add(this.dbgvTotal);
             this.Controls.Add(this.dbgvParts);
             this.Controls.Add(this.dbgvUsers);
             this.Controls.Add(this.dbgvProjects);
             this.Controls.Add(this.dbgvPurchases);
-            this.Controls.Add(this.lblTotalPuchaseCost);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -162,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dbgvProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgvParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgvTotal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,10 +176,10 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private Label lblTotalPuchaseCost;
         private DataGridView dbgvPurchases;
         private DataGridView dbgvProjects;
         private DataGridView dbgvUsers;
         private DataGridView dbgvParts;
+        private DataGridView dbgvTotal;
     }
 }
