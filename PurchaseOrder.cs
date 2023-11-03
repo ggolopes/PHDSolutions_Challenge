@@ -20,8 +20,25 @@ namespace PHD_ChallengeDesktop
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public partial class PurchaseOrder
     {
-        // String Connection
+        // static String Connection
         public static SqlConnection DB_conn = new SqlConnection(@"Server=NBASUSGUIGA;Database=phdChallenge_DB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+
+
+        private PurchaseOrderPurchaseItem[] purchaseItemField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("purchaseItem")]
+        public PurchaseOrderPurchaseItem[] purchaseItem
+        {
+            get
+            {
+                return this.purchaseItemField;
+            }
+            set
+            {
+                this.purchaseItemField = value;
+            }
+        }
 
 
         // Static Method to Delete Purchase Orders from database
@@ -46,6 +63,7 @@ namespace PHD_ChallengeDesktop
             }
         }
 
+        // static method to Deserialize XML file into PurchaseOrder objects
         public static PurchaseOrder DeserializeFromXml(string xmlFileName)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(PurchaseOrder));
@@ -60,6 +78,8 @@ namespace PHD_ChallengeDesktop
             return purchaseOrder;
         }
 
+
+        // method to Save a purchase order into Database
         public Boolean SavePurchaseOrder(string poNumber, PurchaseOrder purchaseOrder)
         {
 
@@ -98,110 +118,7 @@ namespace PHD_ChallengeDesktop
                     }
                 }
             }
-
-
             return true;
         }
-
-        private PurchaseOrderPurchaseItem[] purchaseItemField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("purchaseItem")]
-        public PurchaseOrderPurchaseItem[] purchaseItem
-        {
-            get
-            {
-                return this.purchaseItemField;
-            }
-            set
-            {
-                this.purchaseItemField = value;
-            }
-        }
     }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class PurchaseOrderPurchaseItem
-    {
-
-        private string partNumberField;
-
-        private float quantityField;
-
-        private float costPerField;
-
-        private string purchaserField;
-
-        private string projectField;
-
-        /// <remarks/>
-        public string partNumber
-        {
-            get
-            {
-                return this.partNumberField;
-            }
-            set
-            {
-                this.partNumberField = value;
-            }
-        }
-
-        /// <remarks/>
-        public float quantity
-        {
-            get
-            {
-                return this.quantityField;
-            }
-            set
-            {
-                this.quantityField = value;
-            }
-        }
-
-        /// <remarks/>
-        public float costPer
-        {
-            get
-            {
-                return this.costPerField;
-            }
-            set
-            {
-                this.costPerField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string purchaser
-        {
-            get
-            {
-                return this.purchaserField;
-            }
-            set
-            {
-                this.purchaserField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string project
-        {
-            get
-            {
-                return this.projectField;
-            }
-            set
-            {
-                this.projectField = value;
-            }
-        }
-    }
-
-
 }
